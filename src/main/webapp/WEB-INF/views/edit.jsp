@@ -1,4 +1,4 @@
-<%@ taglib uri="http://www.springframework.org/tags" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>

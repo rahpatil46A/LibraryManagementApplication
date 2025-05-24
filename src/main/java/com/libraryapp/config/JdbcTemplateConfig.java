@@ -15,7 +15,7 @@ public class JdbcTemplateConfig {
         ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
         ds.setUrl("jdbc:mysql://localhost:3306/library_schema");
         ds.setUsername("root");
-        ds.setPassword("7887466968");
+        ds.setPassword("root");
         return ds;
     }
 

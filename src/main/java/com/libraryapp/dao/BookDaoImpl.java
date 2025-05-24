@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.libraryapp.model.Book;
 
 @Repository
-
 public class BookDaoImpl implements BookDao{
 
 	@Autowired
