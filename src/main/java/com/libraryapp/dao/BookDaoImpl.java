@@ -27,12 +27,12 @@ public class BookDaoImpl implements BookDao{
 
     @Override
     public void save(Book book) {
-        jdbcTemplate.update("INSERT INTO book(title, author, category) VALUES (?, ?, ?)", book.getTitle(), book.getAuthor(), book.getCategory());
+        jdbcTemplate.update("INSERT INTO books (title, author, category, image) VALUES (?, ?, ?, ?)", book.getTitle(), book.getAuthor(), book.getCategory(),book.getImage());
     }
 
     @Override
     public void update(Book book) {
-        jdbcTemplate.update("UPDATE book SET title=?, author=?, category=? WHERE id=?", book.getTitle(), book.getAuthor(), book.getCategory(), book.getId());
+        jdbcTemplate.update("UPDATE books SET title = ?, author = ?, category = ?, image = ? WHERE id = ?", book.getTitle(), book.getAuthor(), book.getCategory(), book.getImage(), book.getId());
     }
 
     @Override

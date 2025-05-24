@@ -10,7 +10,7 @@
 <body>
     <h1>Edit Book</h1>
 
-    <form:form method="POST" action="${pageContext.request.contextPath}/update" modelAttribute="book">
+    <form:form method="POST" action="${pageContext.request.contextPath}/update" enctype="multipart/form-data" modelAttribute="book">
         <input type="hidden" path="id" value="${book.id}" />
 
         <table>
@@ -25,6 +25,11 @@
             <tr>
                 <td>Category:</td>
                 <td><form:input path="category" value="${book.category}" /></td>
+            </tr>
+            
+             <tr>
+                <td>Image:</td>
+                <td><input type="file" name="imageFile" /></td>
             </tr>
         </table>
         <br>

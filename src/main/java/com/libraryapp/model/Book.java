@@ -1,12 +1,21 @@
 package com.libraryapp.model;
 
+import java.util.Arrays;
+
 public class Book {
 	private int id;
 	private String title;
     private String author;
     private String category;
+    private byte[] image;
     
-    public int getId() {
+    public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
@@ -30,6 +39,12 @@ public class Book {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", category=" + category + ", image="
+				+ Arrays.toString(image) + "]";
+	}
+	
 	
 
 }

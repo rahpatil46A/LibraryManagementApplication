@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.libraryapp.model.Book;
@@ -31,30 +33,44 @@ public class BookController {
         return "add";
     }
 
-    @PostMapping("add")
-    public String addBook(@ModelAttribute Book book, RedirectAttributes redirectAttrs) {
-        bookService.addBook(book);
-        redirectAttrs.addFlashAttribute("message", "Book added successfully!");
+    @PostMapping("/add")
+    public String addBook(@ModelAttribute Book book, @RequestParam("imageFile") MultipartFile imageFile, RedirectAttributes redirectAttrs) {
+        try {
+        	
+            bookService.addBook(book, imageFile);
+            redirectAttrs.addFlashAttribute("message", "Book added successfully!");
+        } catch (Exception e) {
+            redirectAttrs.addFlashAttribute("error", "Error uploading book: " + e.getMessage());
+        }
         return "redirect:/";
     }
 
-    @GetMapping("edit/{id}")
+    @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable int id, Model model) {
         model.addAttribute("book", bookService.getBookById(id));
         return "edit";
     }
 
-    @PostMapping("update")
-    public String updateBook(@ModelAttribute Book book, RedirectAttributes redirectAttrs) {
-        bookService.updateBook(book);
-        redirectAttrs.addFlashAttribute("message", "Book updated successfully!");
+    @PostMapping("/update")
+    public String updateBook(@ModelAttribute Book book, @RequestParam("imageFile") MultipartFile imageFile, RedirectAttributes redirectAttrs) {
+        try {
+        	
+            bookService.updateBook(book, imageFile);
+            redirectAttrs.addFlashAttribute("message", "Book updated successfully!");
+        } catch (Exception e) {
+            redirectAttrs.addFlashAttribute("error", "Error updating book: " + e.getMessage());
+        }
         return "redirect:/";
     }
 
-    @GetMapping("delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteBook(@PathVariable int id, RedirectAttributes redirectAttrs) {
-        bookService.deleteBook(id);
-        redirectAttrs.addFlashAttribute("message", "Book deleted successfully!");
+        try {
+            bookService.deleteBook(id);
+            redirectAttrs.addFlashAttribute("message", "Book deleted successfully!");
+        } catch (Exception e) {
+            redirectAttrs.addFlashAttribute("error", "Error deleting book: " + e.getMessage());
+        }
         return "redirect:/";
     }
 }
