@@ -21,6 +21,7 @@
                 <th>Title</th>
                 <th>Author</th>
                 <th>Category</th>
+                <th>Image</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -32,10 +33,17 @@
                     <td>${book.author}</td>
                     <td>${book.category}</td>
                     <td>
+                        <c:if test="${not empty book.image}">
+                            <img src="${pageContext.request.contextPath}/image/${book.id}" width="100" height="100" alt="Book Image"/>
+                        </c:if>
+                        <c:if test="${empty book.image}">
+                            <span>No image</span>
+                        </c:if>
+                    </td>
+                    <td>
                         <a href="${pageContext.request.contextPath}/edit/${book.id}">Edit</a> |
                         <a href="${pageContext.request.contextPath}/delete/${book.id}" onclick="return confirm('Are you sure?');">Delete</a>
                     </td>
-                    
                 </tr>
             </c:forEach>
         </tbody>

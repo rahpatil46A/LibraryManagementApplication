@@ -5,26 +5,31 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.libraryapp.dao.BookDao;
 import com.libraryapp.model.Book;
 
 @Service
+@Transactional
 public class BookServiceImpl implements BookService {
     @Autowired
     private BookDao bookDao;
 
     @Override
     public void addBook(Book book, MultipartFile imageFile) throws IOException {
-    	System.out.println(book);
-    	if(imageFile!=null) {
-    		System.out.println("Hello");
-    	}
+    	try {
+    	
         if (imageFile != null && !imageFile.isEmpty()) {
             book.setImage(imageFile.getBytes());
         }
+        System.out.println(book);
         bookDao.save(book);
+    	}
+    	catch(Exception e){
+    		e.printStackTrace();
+    	}
     }
 
     // Update book with image
